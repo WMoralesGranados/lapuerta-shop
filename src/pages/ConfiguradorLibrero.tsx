@@ -122,7 +122,7 @@ export default function ConfiguradorLibrero() {
   const total = formatoPrecio(q.total);
   const liga = `${window.location.origin}/librero-julieta?${aParametros(diseno)}`;
   const etiquetaPrecio = MOSTRAR_PROMOCION ? "Precio con descuento e IVA" : "Precio con IVA";
-  const mensaje = `Hola, quiero cotizar un librero Julieta: ${r.modulos} módulos de ${anchos.join(", ")} cm, repisas: ${detalle(r.repisasPorAncho)}, nichos: ${detalle(r.nichosPorAncho)}, ${COLORES[color].nombre}, ${r.ancho} × ${r.alto} cm ${led ? "con" : "sin"} LED. ${instalar ? "Con instalación en área metropolitana de Monterrey o Saltillo" : "Sin instalación"}. ${etiquetaPrecio}: ${total}. Diseño: ${liga}`;
+  const mensaje = `Hola, quiero cotizar un librero Julieta: ${r.modulos} ${r.modulos === 1 ? "módulo" : "módulos"} de ${anchos.join(", ")} cm, repisas: ${detalle(r.repisasPorAncho)}, nichos: ${detalle(r.nichosPorAncho)}, ${COLORES[color].nombre}, ${r.ancho} × ${r.alto} cm ${led ? "con" : "sin"} LED. ${instalar ? "Con instalación en área metropolitana de Monterrey o Saltillo" : "Sin instalación"}. ${etiquetaPrecio}: ${total}. Diseño: ${liga}`;
 
   return (
     <Layout showWhatsAppFloat={false} stickyHeader={false}>

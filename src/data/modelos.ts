@@ -1,5 +1,6 @@
 import { precioDesdeCloset } from "@/lib/closets/precios";
 import { precioDesdeLibrero } from "@/lib/librero/calc";
+import { precioDesdeVestidor } from "@/lib/vestidor/calc";
 
 export type Categoria = "closets" | "libreros" | "vestidores";
 
@@ -11,7 +12,6 @@ export type Modelo = {
   lema: string;
   incluye: string[];
   imagen: string;
-  // Temporal en vestidor: es un valor fijo y luego se calculará con la lógica real.
   precioDesde: number;
   notaPrecio: string;
   ruta: string;
@@ -138,9 +138,8 @@ export const modelos: Modelo[] = [
     lema: "Lineal, en L, en U o tipo espejo, con luz LED, tubos y cajoneras.",
     incluye: [],
     imagen: "/img/vestidor-led.jpeg",
-    // Por confirmar: estilo colgar de 2.60 m con el 20 % de descuento de mock/ (lista: 17380).
-    precioDesde: 13904,
+    precioDesde: precioDesdeVestidor(),
     notaPrecio: "Lineal de 2.60 m con LED. Con IVA, instalación aparte",
-    ruta: "/vestidores",
+    ruta: "/vestidores?t=lineal&e=colgar",
   },
 ];
