@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 220 20% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 10%;
+    --primary: 220 84% 48%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 20% 10%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 10% 46%;
+    --accent: 32 80% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 14% 90%;
+    --input: 220 14% 90%;
+    --ring: 220 84% 48%;
+    --radius: 0.5rem;
+    --wood: 32 40% 55%;
+    --wood-light: 32 35% 75%;
+    --gradient-hero: linear-gradient(135deg, hsl(220 84% 48% / 0.05) 0%, hsl(220 14% 96%) 100%);
+    --shadow-sm: 0 1px 2px 0 hsl(220 20% 10% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(220 20% 10% / 0.07), 0 2px 4px -2px hsl(220 20% 10% / 0.05);
+    --shadow-lg: 0 10px 15px -3px hsl(220 20% 10% / 0.08), 0 4px 6px -4px hsl(220 20% 10% / 0.05);
+    --shadow-product: 0 8px 30px hsl(220 20% 10% / 0.12);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .card-product {
+    @apply overflow-hidden rounded-xl bg-card;
+    box-shadow: var(--shadow-md);
+    transition:
+      box-shadow 300ms,
+      transform 300ms;
+  }
+
+  .card-product:hover {
+    box-shadow: var(--shadow-product);
+    transform: translateY(-4px);
+  }
+
+  .badge-category {
+    @apply inline-flex items-center rounded-full bg-secondary px-3 py-1 text-sm font-medium text-secondary-foreground;
+  }
+
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
