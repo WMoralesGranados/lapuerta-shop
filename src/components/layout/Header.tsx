@@ -10,7 +10,7 @@ const enlaces = [{ etiqueta: "Inicio", ruta: "/" }, ...ENLACES_CATEGORIAS];
 
 const estiloEnlace = cn("rounded-md text-sm font-medium transition-colors hover:text-primary", focusRing);
 
-export default function Header() {
+export default function Header({ sticky = true }: { sticky?: boolean }) {
   const [abierto, setAbierto] = useState(false);
   const location = useLocation();
 
@@ -19,7 +19,7 @@ export default function Header() {
   }, [location]);
 
   return (
-    <header className="sticky top-0 z-30 border-b bg-background/95 backdrop-blur">
+    <header className={cn("border-b bg-background/95 backdrop-blur", sticky && "sticky top-0 z-30")}>
       <div className="bg-primary px-4 py-1.5 text-center text-xs font-medium text-primary-foreground">
         Diseñado y fabricado en Monterrey, México • Instalación en área metropolitana de Monterrey y
         Saltillo

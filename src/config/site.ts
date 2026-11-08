@@ -2,6 +2,9 @@ export const WHATSAPP_NUMERO = "528132381889";
 
 export const COBERTURA = "Área metropolitana de Monterrey y Saltillo";
 
+// Actívala solo cuando el cliente confirme la promoción. El total siempre incluye el descuento vigente.
+export const MOSTRAR_PROMOCION: boolean = false;
+
 export const MENSAJE_GENERAL = "Hola, me interesa información sobre sus muebles a medida.";
 
 export function whatsappUrl(mensaje: string) {

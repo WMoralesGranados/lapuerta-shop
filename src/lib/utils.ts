@@ -8,13 +8,10 @@ export function cn(...inputs: ClassValue[]) {
 export const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
 
-const precioMXN = new Intl.NumberFormat("es-MX", {
-  style: "currency",
-  currency: "MXN",
-  minimumFractionDigits: 0,
-  maximumFractionDigits: 2,
-});
+const opcionesPrecio = { style: "currency", currency: "MXN" } as const;
+const precioEntero = new Intl.NumberFormat("es-MX", { ...opcionesPrecio, maximumFractionDigits: 0 });
+const precioCentavos = new Intl.NumberFormat("es-MX", { ...opcionesPrecio, minimumFractionDigits: 2 });
 
 export function formatoPrecio(valor: number) {
-  return precioMXN.format(valor);
+  return (Number.isInteger(valor) ? precioEntero : precioCentavos).format(valor);
 }

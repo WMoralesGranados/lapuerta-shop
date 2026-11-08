@@ -6,12 +6,13 @@ import WhatsAppFloat from "@/components/WhatsAppFloat";
 type LayoutProps = {
   children: ReactNode;
   showWhatsAppFloat?: boolean;
+  stickyHeader?: boolean;
 };
 
-export default function Layout({ children, showWhatsAppFloat = true }: LayoutProps) {
+export default function Layout({ children, showWhatsAppFloat = true, stickyHeader = true }: LayoutProps) {
   return (
     <div className="flex min-h-screen flex-col">
-      <Header />
+      <Header sticky={stickyHeader} />
       <main className="flex-1">{children}</main>
       <Footer />
       {showWhatsAppFloat && <WhatsAppFloat />}

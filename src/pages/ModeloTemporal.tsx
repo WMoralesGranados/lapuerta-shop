@@ -1,17 +1,14 @@
 import { ArrowLeft, MessageCircle } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import WhatsAppLink from "@/components/WhatsAppLink";
 import { modelos } from "@/data/modelos";
 import { cn, focusRing, formatoPrecio } from "@/lib/utils";
 import NotFound from "@/pages/NotFound";
 
-// Página temporal: luego será el configurador de cada modelo.
-export default function ModeloTemporal({ slug }: { slug?: string }) {
-  const { modelo: parametro } = useParams();
-  const modelo = slug
-    ? modelos.find((m) => m.slug === slug)
-    : modelos.find((m) => m.categoria === "closets" && m.slug === parametro);
+// Página temporal del vestidor: luego será su configurador.
+export default function ModeloTemporal({ slug }: { slug: string }) {
+  const modelo = modelos.find((m) => m.slug === slug);
 
   if (!modelo) return <NotFound />;
 

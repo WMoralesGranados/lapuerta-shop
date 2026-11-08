@@ -1,3 +1,6 @@
+import { precioDesdeCloset } from "@/lib/closets/precios";
+import { precioDesdeLibrero } from "@/lib/librero/calc";
+
 export type Categoria = "closets" | "libreros" | "vestidores";
 
 export type Modelo = {
@@ -8,7 +11,7 @@ export type Modelo = {
   lema: string;
   incluye: string[];
   imagen: string;
-  // Temporal: precioDesde es un valor fijo y luego se calculará con la lógica real.
+  // Temporal en vestidor: es un valor fijo y luego se calculará con la lógica real.
   precioDesde: number;
   notaPrecio: string;
   ruta: string;
@@ -37,7 +40,7 @@ export const modelos: Modelo[] = [
       "Interior y cajones en blanco",
     ],
     imagen: "/img/image3.png",
-    precioDesde: 11550,
+    precioDesde: precioDesdeCloset("classic"),
     notaPrecio: NOTA_CLOSETS,
     ruta: "/closets/florencia-classic",
   },
@@ -55,7 +58,7 @@ export const modelos: Modelo[] = [
       "Interior y cajones en blanco",
     ],
     imagen: "/img/image2.png",
-    precioDesde: 11550,
+    precioDesde: precioDesdeCloset("gola"),
     notaPrecio: NOTA_CLOSETS,
     ruta: "/closets/florencia-gola",
   },
@@ -74,7 +77,7 @@ export const modelos: Modelo[] = [
       "Bisagras y correderas con cierre lento",
     ],
     imagen: "/img/roble-colorado.jpg",
-    precioDesde: 16132.25,
+    precioDesde: precioDesdeCloset("premium"),
     notaPrecio: NOTA_CLOSETS,
     ruta: "/closets/florencia-premium",
   },
@@ -93,7 +96,7 @@ export const modelos: Modelo[] = [
       "Bisagras ocultas y correderas de extensión ligera",
     ],
     imagen: "/img/image3.png",
-    precioDesde: 14900,
+    precioDesde: precioDesdeCloset("bari"),
     notaPrecio: NOTA_CLOSETS,
     ruta: "/closets/closet-bari",
   },
@@ -111,7 +114,7 @@ export const modelos: Modelo[] = [
       "Bisagras ocultas y correderas de extensión ligera",
     ],
     imagen: "/img/image2.png",
-    precioDesde: 18960,
+    precioDesde: precioDesdeCloset("aura"),
     notaPrecio: NOTA_CLOSETS,
     ruta: "/closets/closet-aura",
   },
@@ -123,8 +126,7 @@ export const modelos: Modelo[] = [
     lema: "Módulos con repisas y nichos, con o sin luz LED.",
     incluye: [],
     imagen: "/img/librero-julieta.jpg",
-    // Por confirmar: ya trae el 20 % de descuento de mock/ (lista: 7430).
-    precioDesde: 5944,
+    precioDesde: precioDesdeLibrero(),
     notaPrecio: "1 módulo de 80 cm con LED. Con IVA, instalación aparte",
     ruta: "/librero-julieta",
   },
@@ -136,8 +138,8 @@ export const modelos: Modelo[] = [
     lema: "Lineal, en L, en U o tipo espejo, con luz LED, tubos y cajoneras.",
     incluye: [],
     imagen: "/img/vestidor-led.jpeg",
-    // Por confirmar: ya trae el 20 % de descuento de mock/ (lista: 25408).
-    precioDesde: 20326,
+    // Por confirmar: estilo colgar de 2.60 m con el 20 % de descuento de mock/ (lista: 17380).
+    precioDesde: 13904,
     notaPrecio: "Lineal de 2.60 m con LED. Con IVA, instalación aparte",
     ruta: "/vestidores",
   },
