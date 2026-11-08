@@ -17,6 +17,7 @@ import {
   type ModeloId,
 } from "@/lib/closets/precios";
 import type { OpcionesCarga } from "@/lib/closets/visor3d";
+import { useTituloPagina } from "@/lib/useTituloPagina";
 import { cn, focusRing, formatoPrecio } from "@/lib/utils";
 import NotFound from "@/pages/NotFound";
 
@@ -44,6 +45,7 @@ function aParametros(c: ConfigCloset) {
 }
 
 function Configurador({ modelo }: { modelo: ModeloId }) {
+  useTituloPagina(`${MODELOS[modelo].nombre} | La Puerta`);
   const [params, setParams] = useSearchParams();
   const navigate = useNavigate();
 

@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
+import { useTituloPagina } from "@/lib/useTituloPagina";
 import { cn, focusRing } from "@/lib/utils";
 
 export default function NotFound() {
+  useTituloPagina("Página no encontrada | La Puerta");
   return (
     <Layout>
       <section className="container-custom py-24 text-center">

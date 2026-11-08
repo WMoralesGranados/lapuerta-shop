@@ -8,6 +8,7 @@ import type { SeleccionItem } from "@/components/vestidor/ParedVestidor";
 import WhatsAppLink from "@/components/WhatsAppLink";
 import { MOSTRAR_PROMOCION } from "@/config/site";
 import { ACABADOS, COLORES } from "@/lib/closets/precios";
+import { useTituloPagina } from "@/lib/useTituloPagina";
 import { cn, focusRing, formatoPrecio } from "@/lib/utils";
 import {
   AJUSTE,
@@ -44,6 +45,7 @@ const primerFijo = (p: Pared | undefined) => (p && p.ajuste === 0 && p.anchos.le
 const textoModulos = (n: number) => `${n} ${n === 1 ? "módulo" : "módulos"}`;
 
 export default function ConfiguradorVestidor() {
+  useTituloPagina("Vestidores a tu medida | La Puerta");
   const [params, setParams] = useSearchParams();
   const estado = useMemo(() => leerEstado(params), [params]);
   const [vistaElegida, setVista] = useState<VistaVestidor>("planta");
@@ -158,7 +160,7 @@ export default function ConfiguradorVestidor() {
     }
     const nuevo = agregarV(p.mods[modSel], t);
     if (!nuevo) {
-      setMensaje(t === "t" ? `No cabe un tubo en el módulo ${modSel + 1}: abajo necesita ${TUBO.colgarMin} cm libres para colgar y un nicho lo impide. Mueve o quita el nicho.` : `Ya no cabe otr${t === "n" ? "o nicho" : "a repisa"} en el módulo ${modSel + 1}.`);
+      setMensaje(t === "t" ? `No cabe un tubo en el módulo ${modSel + 1}: abajo necesita ${TUBO.colgarMin} cm libres para colgar y otra pieza lo impide. Muévela o quítala.` : `Ya no cabe ${t === "n" ? "otro nicho" : t === "c" ? "otra cajonera" : "otra repisa"} en el módulo ${modSel + 1}.`);
       return;
     }
     const quitadas = p.mods[modSel].length + 1 - nuevo.length;

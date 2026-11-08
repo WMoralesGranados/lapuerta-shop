@@ -21,6 +21,7 @@ import {
   type TipoPieza,
 } from "@/lib/librero/calc";
 import type { SeleccionPieza } from "@/lib/librero/visor3d";
+import { useTituloPagina } from "@/lib/useTituloPagina";
 import { cn, focusRing, formatoPrecio } from "@/lib/utils";
 
 const SIN_SCROLL = { replace: true, state: { keepScroll: true } };
@@ -41,6 +42,7 @@ const detalle = (lista: { w: number; cant: number }[]) =>
   lista.length ? lista.map((x) => `${x.cant} de ${x.w} cm`).join(", ") : "0";
 
 export default function ConfiguradorLibrero() {
+  useTituloPagina("Librero Julieta | La Puerta");
   const [params, setParams] = useSearchParams();
   const [modElegido, setModElegido] = useState(0);
   const [seleccion, setSeleccion] = useState<SeleccionPieza | null>(null);
