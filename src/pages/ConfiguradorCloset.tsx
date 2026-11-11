@@ -6,10 +6,10 @@ import VisorCloset from "@/components/closets/VisorCloset";
 import Layout from "@/components/layout/Layout";
 import WhatsAppLink from "@/components/WhatsAppLink";
 import { modelos } from "@/data/modelos";
+import { mensajeCloset } from "@/lib/closets/mensajeWhatsApp";
 import {
   MODELOS,
   cotizar,
-  descripcion,
   normalizar,
   validar,
   type ConfigCloset,
@@ -120,12 +120,12 @@ function Configurador({ modelo }: { modelo: ModeloId }) {
   );
 
   const total = cotizacion.ok ? formatoPrecio(cotizacion.total) : "Con un asesor";
-  const mensaje = cotizacion.ok
-    ? `Hola, quiero cotizar: ${descripcion(cfg)}. Total ${total}.`
-    : `Hola, quiero cotizar: ${descripcion(cfg)}.`;
+  const slug = modelos.find((m) => m.id === modelo)?.slug;
+  const liga = `${window.location.origin}/closets/${slug}?${aParametros(cfg)}`;
+  const mensaje = mensajeCloset(cfg, cotizacion, liga);
 
   return (
-    <Layout showWhatsAppFloat={false} stickyHeader={false}>
+    <Layout showWhatsAppFloat={false} stickyHeader={false} mensajeWhatsApp={mensaje}>
       <div className="min-[900px]:grid min-[900px]:h-[calc(100dvh-93px)] min-[900px]:grid-cols-[minmax(0,1fr)_400px] min-[900px]:grid-rows-[minmax(0,1fr)] lg:h-[calc(100dvh-109px)]">
         <VisorCloset cfg={cfg} actualizar={actualizar} opcionesCarga={opcionesCarga} />
 

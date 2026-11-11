@@ -10,7 +10,7 @@ const enlaces = [{ etiqueta: "Inicio", ruta: "/" }, ...ENLACES_CATEGORIAS];
 
 const estiloEnlace = cn("rounded-md text-sm font-medium transition-colors hover:text-primary", focusRing);
 
-export default function Header({ sticky = true }: { sticky?: boolean }) {
+export default function Header({ sticky = true, mensajeWhatsApp = MENSAJE_GENERAL }: { sticky?: boolean; mensajeWhatsApp?: string }) {
   const [abierto, setAbierto] = useState(false);
   const location = useLocation();
 
@@ -38,7 +38,7 @@ export default function Header({ sticky = true }: { sticky?: boolean }) {
 
         <div className="flex items-center gap-2">
           <WhatsAppLink
-            mensaje={MENSAJE_GENERAL}
+            mensaje={mensajeWhatsApp}
             className={cn(
               "inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90",
               focusRing,

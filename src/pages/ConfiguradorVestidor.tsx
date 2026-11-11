@@ -7,20 +7,16 @@ import PanelVestidor from "@/components/vestidor/PanelVestidor";
 import type { SeleccionItem } from "@/components/vestidor/ParedVestidor";
 import WhatsAppLink from "@/components/WhatsAppLink";
 import { MOSTRAR_PROMOCION } from "@/config/site";
-import { ACABADOS, COLORES } from "@/lib/closets/precios";
 import { useTituloPagina } from "@/lib/useTituloPagina";
 import { cn, focusRing, formatoPrecio } from "@/lib/utils";
 import {
   AJUSTE,
   ESPACIOS,
-  ESTILOS,
-  ETIQUETAS,
   MEDIDAS_INICIALES,
   TUBO,
   agregarV,
   armarPared,
   cabeCajonera,
-  cajonerasDe,
   cotizarV,
   disenar,
   fijosDe,
@@ -34,6 +30,7 @@ import {
   type TipoEspacio,
   type TipoPiezaV,
 } from "@/lib/vestidor/calc";
+import { mensajeVestidor } from "@/lib/vestidor/mensajeWhatsApp";
 import { aParametros, leerEstado, type EstadoVestidor } from "@/lib/vestidor/url";
 import type { SeleccionPiezaV } from "@/lib/vestidor/visor3d";
 
@@ -202,19 +199,13 @@ export default function ConfiguradorVestidor() {
   }, []);
 
   const q = cotizarV(diseno.paredes, led, instalar, 0, undefined, cl);
-  const nCaj = cajonerasDe(diseno.paredes);
   const conError = Boolean(diseno.error);
   const total = conError ? "Con un asesor" : formatoPrecio(q.total);
-  const medTxt = ESPACIOS[tipo].medidas.map((k) => `${(ETIQUETAS[tipo][k] as string).toLowerCase()} ${med[k]} cm`).join(", ");
-  const nombreTipo = ESPACIOS[tipo].nombre.toLowerCase();
   const liga = `${window.location.origin}/vestidores?${aParametros(estado)}`;
-  const etiquetaPrecio = MOSTRAR_PROMOCION ? "Precio con descuento e IVA" : "Precio con IVA";
-  const texto = conError
-    ? `Hola, quiero cotizar un vestidor ${nombreTipo} (${medTxt}). Diseño: ${liga}`
-    : `Hola, quiero cotizar un vestidor ${nombreTipo} (${medTxt}), estilo ${ESTILOS[estilo].nombre.toLowerCase()}, ${textoModulos(q.modulos)}, ${COLORES[color].nombre}, ${led ? "con" : "sin"} LED, ${instalar ? "con instalación" : "sin instalación"}${nCaj ? `, cajones con correderas ${cl ? "de cierre lento" : "normales"} y jaladera mini ${ACABADOS[jal].toLowerCase()}` : ""}. ${etiquetaPrecio}: ${total}. Diseño: ${liga}`;
+  const texto = mensajeVestidor(estado, q, liga);
 
   return (
-    <Layout showWhatsAppFloat={false} stickyHeader={false}>
+    <Layout showWhatsAppFloat={false} stickyHeader={false} mensajeWhatsApp={texto}>
       <div className="min-[900px]:grid min-[900px]:h-[calc(100dvh-93px)] min-[900px]:grid-cols-[minmax(0,1fr)_400px] min-[900px]:grid-rows-[minmax(0,1fr)] lg:h-[calc(100dvh-109px)]">
         <EscenarioVestidor
           diseno={diseno}

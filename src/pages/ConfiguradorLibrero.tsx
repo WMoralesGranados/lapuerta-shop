@@ -20,6 +20,7 @@ import {
   type Pieza,
   type TipoPieza,
 } from "@/lib/librero/calc";
+import { mensajeLibrero } from "@/lib/librero/mensajeWhatsApp";
 import type { SeleccionPieza } from "@/lib/librero/visor3d";
 import { useTituloPagina } from "@/lib/useTituloPagina";
 import { cn, focusRing, formatoPrecio } from "@/lib/utils";
@@ -37,9 +38,6 @@ function aParametros({ mods, anchos, color, led, instalar }: Diseno) {
     i: instalar ? "1" : "0",
   });
 }
-
-const detalle = (lista: { w: number; cant: number }[]) =>
-  lista.length ? lista.map((x) => `${x.cant} de ${x.w} cm`).join(", ") : "0";
 
 export default function ConfiguradorLibrero() {
   useTituloPagina("Librero Julieta | La Puerta");
@@ -123,11 +121,10 @@ export default function ConfiguradorLibrero() {
   const q = cotizar(mods, anchos, led, instalar);
   const total = formatoPrecio(q.total);
   const liga = `${window.location.origin}/librero-julieta?${aParametros(diseno)}`;
-  const etiquetaPrecio = MOSTRAR_PROMOCION ? "Precio con descuento e IVA" : "Precio con IVA";
-  const mensaje = `Hola, quiero cotizar un librero Julieta: ${r.modulos} ${r.modulos === 1 ? "módulo" : "módulos"} de ${anchos.join(", ")} cm, repisas: ${detalle(r.repisasPorAncho)}, nichos: ${detalle(r.nichosPorAncho)}, ${COLORES[color].nombre}, ${r.ancho} × ${r.alto} cm ${led ? "con" : "sin"} LED. ${instalar ? "Con instalación en área metropolitana de Monterrey o Saltillo" : "Sin instalación"}. ${etiquetaPrecio}: ${total}. Diseño: ${liga}`;
+  const mensaje = mensajeLibrero(diseno, q, liga);
 
   return (
-    <Layout showWhatsAppFloat={false} stickyHeader={false}>
+    <Layout showWhatsAppFloat={false} stickyHeader={false} mensajeWhatsApp={mensaje}>
       <div className="min-[900px]:grid min-[900px]:h-[calc(100dvh-93px)] min-[900px]:grid-cols-[minmax(0,1fr)_400px] min-[900px]:grid-rows-[minmax(0,1fr)] lg:h-[calc(100dvh-109px)]">
         <EscenarioLibrero
           mods={mods}
